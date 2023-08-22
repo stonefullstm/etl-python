@@ -21,3 +21,10 @@ pedidos = [ (
         produto[5] * 3 - produto[4] + produto[5] * produto[6] // 30
     ) for produto in produtos if produto[4] < produto[5] * 3]
 
+# Load
+# Atualiza a tabela de pedidos utilizando a lista de pedidos gerada
+# Os pedidos anteriormente gerados na tabela são removidos. Considera-se que já foram efetivados junto aos fornecedores
+cur.execute('DELETE FROM pedidos')
+cur.executemany('INSERT INTO pedidos VALUES (?, ?, ?, ?)', pedidos)
+con.commit()
+con.close()
